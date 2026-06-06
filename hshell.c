@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 int main(void)
 {
@@ -21,9 +22,22 @@ int main(void)
 			return 0;
 		}
 
-		if(strcmp(input, "help") == 0){
+		else if(strcmp(input, "help") == 0){
 			printf("Available Commands:\n");
-			printf("\nhelp - Show help\nexit - Exit HShell\n");
+			printf("\nhelp - Show help\npwd - Show current directory\nexit - Exit HShell\n");
+			continue;
+		}
+
+		else if(strcmp(input, "pwd") == 0){
+			char path[1024];
+
+			if(getcwd(path, sizeof(path)) == NULL){
+				perror("getcwd");
+			}
+			else{
+				printf("%s\n", path);
+			}
+
 			continue;
 		}
 		
