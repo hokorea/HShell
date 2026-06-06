@@ -12,7 +12,10 @@ int main(void)
 
 	while(1){
 		printf("HShell> ");
-		fgets(input, sizeof(input), stdin);
+		if(fgets(input, sizeof(input), stdin) == NULL){
+			printf("\nSee you later!!\n");
+			break;
+		}
 
 		for(int i = 0; input[i] != '\0'; i++){
 			if(input[i] == '\n'){
