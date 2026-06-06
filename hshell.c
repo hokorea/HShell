@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
 void cmd_help(void);
 void cmd_pwd(void);
+void cmd_clear(void);
 
 int main(void)
 {
@@ -37,6 +39,11 @@ int main(void)
 			cmd_pwd();
 			continue;
 		}
+
+		else if(strcmp(input, "clear") == 0){
+			cmd_clear();
+			continue;
+		}
 		
 		printf("You typed: %s\n", input);
 	}
@@ -60,4 +67,8 @@ void cmd_pwd(void){
 	else{
 		printf("%s\n", path);
 	}
+}
+
+void cmd_clear(void){
+	system("clear");
 }
