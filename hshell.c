@@ -20,6 +20,12 @@ int main(void)
 			printf("See you later!!\n");
 			return 0;
 		}
+
+		if(strcmp(input, "help") == 0){
+			printf("Available Commands:\n");
+			printf("\nhelp - Show help\nexit - Exit HShell\n");
+			continue;
+		}
 		
 		printf("You typed: %s\n", input);
 	}
