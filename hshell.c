@@ -6,11 +6,14 @@
 void cmd_help(void);
 void cmd_pwd(void);
 void cmd_clear(void);
+void show_banner(void);
 
 int main(void)
 {
 	char input[100];
-	printf("Welcome to HShell!\n");
+
+	cmd_clear();
+	show_banner();
 
 	while(1){
 		printf("HShell> ");
@@ -55,6 +58,7 @@ void cmd_help(void){
 	printf("Available Commands:\n");
 	printf("\nhelp - Show help\n");
 	printf("pwd - Show current directory\n");
+	printf("clear - Clear screen\n");
 	printf("exit - Exit HShell\n");
 }
 
@@ -71,4 +75,15 @@ void cmd_pwd(void){
 
 void cmd_clear(void){
 	system("clear");
+}
+
+void show_banner(void)
+{
+	printf("=================================\n");
+	printf("          HShell v1.0\n");
+	printf("          Made by Hoke\n");
+	printf("=================================\n");
+	printf("\n");
+	printf("Type 'help' for available commands.\n");
+	printf("\n");
 }
