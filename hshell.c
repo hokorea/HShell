@@ -2,6 +2,9 @@
 #include <string.h>
 #include <unistd.h>
 
+void cmd_help(void);
+void cmd_pwd(void);
+
 int main(void)
 {
 	char input[100];
@@ -23,21 +26,12 @@ int main(void)
 		}
 
 		else if(strcmp(input, "help") == 0){
-			printf("Available Commands:\n");
-			printf("\nhelp - Show help\npwd - Show current directory\nexit - Exit HShell\n");
+			cmd_help();
 			continue;
 		}
 
 		else if(strcmp(input, "pwd") == 0){
-			char path[1024];
-
-			if(getcwd(path, sizeof(path)) == NULL){
-				perror("getcwd");
-			}
-			else{
-				printf("%s\n", path);
-			}
-
+			cmd_pwd();
 			continue;
 		}
 		
@@ -45,4 +39,22 @@ int main(void)
 	}
 	
 	return 0;
+}
+
+void cmd_help(void){
+	printf("Available Commands:\n");
+	printf("\nhelp - Show help\n");
+	printf("pwd - Show current directory\n");
+	printf("exit - Exit HShell\n");
+}
+
+void cmd_pwd(void){
+	char path[1024];
+	
+	if(getcwd(path, sizeof(path)) == NULL){
+		perror("getcwd");
+	}
+	else{
+		printf("%s\n", path);
+	}
 }
