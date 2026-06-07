@@ -100,7 +100,7 @@ void cmd_clear(void){
 
 void cmd_cd(char *arg){
 	if (arg == NULL){
-		printf("Usage: cd <directory>\n");
+		chdir(home);
 	}
 	else if(chdir(arg) != 0){
 		perror("cd");
