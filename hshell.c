@@ -35,6 +35,10 @@ int main(void)
 		
 		char *cmd = strtok(temp, " ");
 		char *arg = strtok(NULL, " ");
+
+		if(cmd == NULL){
+			continue;
+		}
 		
 		if(strcmp(cmd, "exit") == 0){
 			printf("See you later!!\n");
