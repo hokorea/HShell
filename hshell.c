@@ -8,6 +8,9 @@ void cmd_pwd(void);
 void cmd_clear(void);
 void cmd_cd(char *arg);
 void show_banner(void);
+void show_prompt(void);
+
+const char *home = "/data/data/com.termux/files/home";
 
 int main(void)
 {
@@ -17,7 +20,7 @@ int main(void)
 	show_banner();
 
 	while(1){
-		printf("HShell> ");
+		show_prompt();
 		if(fgets(input, sizeof(input), stdin) == NULL){
 			printf("\nSee you later!!\n");
 			break;
@@ -113,4 +116,20 @@ void show_banner(void)
 	printf("\n");
 	printf("Type 'help' for available commands.\n");
 	printf("\n");
+}
+
+void show_prompt(void){
+	char path[1024];
+
+	if(getcwd(path, sizeof(path)) == NULL){
+		printf("HShell:?> ");
+		return;
+	}
+
+	if(strncmp(home, path, strlen(home)) == 0){
+		printf("HShell:~%s > ", path + strlen(home));
+	}
+	else{
+		printf("HShell:%s > ", path);
+	}
 }
