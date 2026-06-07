@@ -6,6 +6,7 @@
 void cmd_help(void);
 void cmd_pwd(void);
 void cmd_clear(void);
+void cmd_cd(char *arg);
 void show_banner(void);
 
 int main(void)
@@ -28,23 +29,35 @@ int main(void)
 				break;
 			}
 		}
-		if(strcmp(input, "exit") == 0){
+
+		char temp[100];
+		strcpy(temp, input);
+		
+		char *cmd = strtok(temp, " ");
+		char *arg = strtok(NULL, " ");
+		
+		if(strcmp(cmd, "exit") == 0){
 			printf("See you later!!\n");
 			return 0;
 		}
 
-		else if(strcmp(input, "help") == 0){
+		else if(strcmp(cmd, "help") == 0){
 			cmd_help();
 			continue;
 		}
 
-		else if(strcmp(input, "pwd") == 0){
+		else if(strcmp(cmd, "pwd") == 0){
 			cmd_pwd();
 			continue;
 		}
 
-		else if(strcmp(input, "clear") == 0){
+		else if(strcmp(cmd, "clear") == 0){
 			cmd_clear();
+			continue;
+		}
+
+		else if(strcmp(cmd, "cd") == 0){
+			cmd_cd(arg);
 			continue;
 		}
 		
@@ -59,6 +72,7 @@ void cmd_help(void){
 	printf("\nhelp - Show help\n");
 	printf("pwd - Show current directory\n");
 	printf("clear - Clear screen\n");
+	printf("cd - Change directory\n");
 	printf("exit - Exit HShell\n");
 }
 
@@ -75,6 +89,15 @@ void cmd_pwd(void){
 
 void cmd_clear(void){
 	system("clear");
+}
+
+void cmd_cd(char *arg){
+	if (arg == NULL){
+		printf("Usage: cd <directory>\n");
+	}
+	else if(chdir(arg) != 0){
+		perror("cd");
+	}
 }
 
 void show_banner(void)
